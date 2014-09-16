@@ -6,13 +6,315 @@
 }
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{tikz}
+\usetikzlibrary{plotmarks}
 
-\title{Durchf"uhrung einer Studie}
+
+\title{Planung und Durchf\"uhrung von Studien}
 \author{Stefan Heyder}
 
 \institute{TU Ilmenau}
-\date{\today}
+\date{8. Juli 2014}
 
 \begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
 
+\begin{frame}
+  \frametitle{Inhalt} 
+  \tableofcontents 
+\end{frame}
+
+\section{Planung von Versuchen}
+
+\begin{frame}
+  \frametitle{Grunds"atze der Versuchsplanung}
+  \begin{itemize}[<+->]
+    \item Vor Beginn der Planung muss die Versuchsfrage exakt formuliert werden.
+      \begin{itemize}[<+->]
+        \item Was m"ochte ich wissen?
+        \item Was ist meine Grundgesamtheit?
+        \item Was sind meine Behandlungen/Einflu\ss faktoren?
+      \end{itemize}
+    \item Jede Stufe der $p$ Behandlungen muss auf mehrere ($n$) Versuchsobjekte angewendet werden.
+    \item Die Auswahl der Versuchsobjekte erfolgt zuf"allig.
+    \item Die Zuordnung der Versuchsobjekte zu den Behandlungen erfolgt zuf"allig.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vollst"andig  randomisierter Versuchsplan}
+  \begin{itemize}[<+->]
+    \item w"ahlen (zuf"allig) $N=p\cdot n$ Objekte aus der Grundgesamtheit aus
+    \item w"ahlen jeweils $n$ Objekte f"ur eine der $p$ Behandlungen aus, und f"uhren die Behandlung durch
+    \item messen die Auswirkungen auf ein Merkmal, auf das die Behandlung einen Einfluss haben k"onnte
+    \item Auswertung mit einfacher Varianzanalyse
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Blockbildung}
+  \begin{alertblock}{Problem}
+    Trotz zuf"alliger Auswahl der Testobjekte k"onnen sich Faktoren "uberlagern.    
+  \end{alertblock}
+  \pause
+  \begin{exampleblock}{Beispiel}
+    Wir vergleichen zwei Medikamente: A und B. Dazu haben wir 5 M"anner und 5 Frauen zuf"allig aus der Bev"olkerung ausgew"ahlt. Da die Auswahl der Versuchsobjekte ebenfalls zuf"allig erfolgt, kann es sein das in Gruppe A 4 M"anner sind. Wirkt nun Medikament A besonders gut/schlecht bei M"annern, so ist das Ergebnis verzerrt.    
+  \end{exampleblock}
+\end{frame}
+\begin{frame}
+  \frametitle{Blockbildung}
+  \begin{block}{L"osung}
+    Zun"achst identifizieren wir einen einflussreichen Faktor (hier: Geschlecht). Dadurch zerf"allt die Grundgesamtheit in $r$ Schichten bzw. Klassen. Aus jeder dieser Schichten w"ahlen wir einen Block der Gr"o{\ss}e $n\cdot p$ aus.  
+  \end{block}
+  \pause
+  Aus jedem dieser Bl"ocke von $n\cdot p$ Versuchsobjekten w"ahlen wir nun (zuf"allig) pro Behandlung $n$ Versuchsobjekte aus.
+  \pause
+  \begin{exampleblock}{Beispiel: Belichtungsdauer} 
+    Untersuchen Auswirkungen von drei verschieden Belichtungsdauern (Kurztag, Langtag, Dauerlicht) auf S"amlinge (somit $p = 3$). Als Blockfaktor w"ahlen wir die vier verschiedenen Herkunftsorte. Damit zerf"allt die Grundgesamtheit in $r = 4$ Klassen. W"ahlen wir $n=2$, so ben"otigen wir $24$ S"amlinge.
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Blockbildung}
+  \begin{itemize}[<+->]
+    \item Einfaches Blockexperiment: jede Behandlung wird nur einmal pro Block durchgef"uhrt
+      \begin{itemize}[<+->]
+        \item Grund: Nat"urliche Klassengr"o{\ss}e nicht gr"o{\ss}er als die Anzahl der verschiedenen Behandlungen
+      \end{itemize}
+  \end{itemize}
+  \pause
+  \begin{exampleblock}{Beispiel: Mastversuch bei Schweinen}
+    Wollen wir vier verschiedene Futtermischungen auf die Mastleistung testen, so w"ahlen wir als Bl"ocke alle Ferkel eines Wurfs. W"ahlen wir hier $n\geq 2$, so beschr"anken wir uns auf W"urfe mit mindestens $8$ Ferkeln. Dadurch verkleinern wir die Grundgesamtheit stark, und k"onnen keine allgemeine Aussage mehr treffen.
+  \end{exampleblock}
+  \pause
+  \begin{itemize}[<+->]
+    \item Klumpenstichprobe: Wie Blockexperiment, nur ein Teil der Bl"ocke (Klumpen) wird zuf"allig f"ur die Behandlung ausgew"ahlt, diese jedoch dann vollst"andig durchgef"uhrt
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Blockbildung}
+  \begin{itemize}[<+->]
+    \item Vollst"andig randomisierte Bl"ocke
+      \begin{itemize}[<+->]
+        \item In jedem Block wird jede Behandlung angewendet
+        \item Zuf"alliges Zuweisen der Behandlungen (falls nicht anders angegeben)
+        \item Mehrere Behandlungen an einem Objekt, so ist die Reihenfolge zuf"allig zu bestimmen
+      \end{itemize}
+    \item Unvollst"andiger Blockplan
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Kreuzklassifikation}
+  \begin{itemize}[<+->]
+    \item Wirkung von zwei frei zuzuordnenden Faktoren auf $r$ bzw. $p$ Stufen soll untersucht werden
+    \item W"ahlen f"ur jede der $r\cdot p$ Kombinationen je $n$ Objekte aus
+  \end{itemize}
+  \pause
+  \begin{exampleblock}{Beispiel: Blutdruck}
+    Wir untersuchen den Einfluss von $5$ Di"aten und $3$ verschiedenen Medikamenten auf den Blutdruck. Nun w"ahlen wir z.B. $10\cdot 15$ Versuchspersonen zuf"allig aus, und weisen je $10$ Personen eine m"ogliche Kombination zu.
+  \end{exampleblock}
+  \pause
+  \begin{itemize}[<+->]
+    \item Ist f"ur einige Faktor Kombinationen nicht m"oglich, falls z.B. Stufen eines Faktors nur in Abh"angigkeit des anderen vorliegen. Hier sprechen wir von Modellen der hierarchischen Klassifikation.
+
+  \end{itemize}
+  \pause
+\end{frame}
+
+\begin{frame}
+  \frametitle{$p\times q$ faktorielles Experiment in vollst"andig randomisierten Bl"ocken}
+  Betrachten wir zwei Faktoren mit $p$ bzw. $q$ Stufen unter Ber"ucksichtigung eines Blockfaktors auf $r$ Stufen, so wenden wir in jedem der $r$ Bl"ocke jede der m"oglichen $p\cdot q$ Stufenkombinationen an. 
+
+  \pause
+  \begin{exampleblock}{Beispiel: Blutdruck}
+    Im vorhergehen Beispiel macht es Sinn als Blockfaktor die verschiedenen Krankenh"auser zu w"ahlen, falls der Versuch station"ar ausgef"uhrt wird.
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Split Plot Experimente}
+  \begin{itemize}[<+->]
+    \item Falls Randomisationsm"oglichkeiten eingeschr"ankt sind
+  \end{itemize}
+  \pause
+  \begin{exampleblock}{Beispiel}
+    Wir untersuchen die Wirkung von 4 Bew"asserungsarten und 2 D"ungmitteln. Uns stehen nur 4 Testfelder (Bl"ocke) zur Verf"ugung. Daher ist keine vollst"andig zuf"allige Zurodnung m"oglich. Wir  splitten die Bl"ocke indem wir jedes Feld in zwei Unterfelder teilen die wir zuf"allig mit einem der beiden D"ungemittel d"ungen.    
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Kovarianzanaylse}
+  \pause
+  Wird eine Faktor nicht kategorisiert, so flie\ss t dieser als Kovariable (St"orvariable) in die Daten ein. Somit kommt man zu Modellen der Kovarianzanalyse.
+  \pause
+  \begin{exampleblock}{Beispiel}
+    Wir testen die Wirkung von verschiedenen Narkotika auf die Zeit bis zur Einschl"aferung. Eine qualitative St"orvariable ist z.B. der Alkoholkonsum (kann vorher erhoben werden, dadurch Blockbildung). Eine quantitative St"orvariable w"are das Gewicht, welches erst beim Versuch erhoben werden kann. Eine andere w"are der Pulsschlag der Versuchsperson. 
+
+  \end{exampleblock}
+  \pause
+  Bez"uglich der St"orvariablen kann man dann eine Regression durchf"uhren.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Einflu\ss faktoren}
+  Man unterscheidet drei Arten von Einflu\ss faktoren:
+  \begin{enumerate}[<+->]
+    \item Haupteinflu\ss faktoren
+    \item kontrollierte weitere Einflu\ss faktoren, k"onnen durch Blockbildung bzw. als Kovariable ber"ucksichtigt werden.
+    \item nicht-kontrollierbare weitere Einflu\ss faktoren, welche durch Randomisation ausgeschaltet werden m"ussen. 
+  \end{enumerate}
+\end{frame}
+
+\section{Anlage von klinischen Studien}
+
+\begin{frame}
+  \frametitle{Klinischer Versuch}
+  \begin{itemize}[<+->]
+    \item Klinischer Versuch: Kontrolliertes Experiment zum Vergleich der Wirkungsweise von mehreren Behandlungen am Menschen
+    \item Ethische Aspekte m"ussen ber"ucksichtigt werden
+    \item Behandlung erfolgt gem"a{\ss} einem Versuchsplan
+  \end{itemize}
+  \pause
+  Es ist stets ein Versuchsprotokoll anzufertigen, dieses enth"alt unter anderem
+  \begin{enumerate}[<+->]
+    \item Die Krankheit
+    \item Die Versuchspersonen
+    \item Die Behandlungen
+    \item Der Versuch
+    \item Anzahl der Personen
+    \item Auswertung
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Klassifikation der Beobachtungen}
+  \begin{itemize}[<+->]
+    \item Zielvariablen
+    \item Ersatzvariablen
+    \item Erkl"arende Variablen
+    \item Begleitende Variablen
+    \item Kontrollvariablen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Auswahl}
+  \begin{itemize}[<+->]
+    \item Repr"asentativit"at der Versuchspersonen muss gegeben sein
+    \item Gruppen in sich heterogen
+    \item Gruppen untereinander homogen
+    \item Streng zuf"allige Zuordnung erfordert, dass keine Kontraindikation f"ur jede der Behandlungen vorliegen
+      \begin{itemize}[<+->]
+        \item Alle Bewerber ablehnen, bei welchen Verdacht auf Komplikationen besteht
+        \item Treten meist erst w"ahrend des Versuchs auf, also m"ussen Regeln daf"ur bestehen
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Zuordnung}
+  \begin{itemize}[<+->]
+    \item retroperspektive Zuordnung 
+      \begin{itemize}[<+->]
+        \item Zuordnung durch Entscheidung des Arztes
+        \item Gibt "Uberblick "uber Erfolg der Behandlung
+        \item Problem: bestimmte riskante Behandlungen werden nur selten eingesetzt
+      \end{itemize}
+    \item historische Kontrolle
+      \begin{itemize}[<+->]
+        \item Analyse von abgeschlossenen Studien/ Krankenberichten
+        \item Ergebnis leicht "uberpr"ufbar
+        \item Problem: Homogenit"at zwischen Gruppen oft nicht gegeben
+      \end{itemize}
+    \item Zurodnung auf freiwilliger Basis
+      \begin{itemize}[<+->]
+        \item Patient entscheidet selbst
+        \item Problem: Strukturgleichheit im Allgemeinen nicht gegeben
+        \item psychologische/sozial Faktoren beeinflussen die Wahl
+      \end{itemize}
+    \item alternierende Verfahren
+      \begin{itemize}[<+->]
+        \item Patienten werden zyklisch nach Reihenfolge der Zulassung zugewiesen
+      \end{itemize}
+    \item aleatorische Zuordnung
+      \begin{itemize}[<+->]
+        \item wie oben, Reihenfolge ist jedoch zuf"allig und unbekannt
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Blindversuche}
+  \begin{itemize}[<+->]
+    \item Einfacher Blindversuch
+      \begin{itemize}[<+->]
+        \item Proband wei{\ss}  nicht welche Behandlung er erh"alt
+        \item verhindert Autosuggestion
+        \item glaubw"urdigere Aussagen des Patienten
+      \end{itemize}
+    \item Doppelter Blindversuch
+      \begin{itemize}[<+->]
+        \item Proband und behandelnder Arzt wissen nicht welche Behandlung durchgef"uhrt wird
+        \item verhindert Heterosuggestion
+      \end{itemize}
+  \end{itemize}
+  \pause
+  Blindversuche sind aber nicht immer einsetzbar, und ethisch problematisch.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ethische Probleme}
+  \begin{itemize}[<+->]
+    \item Keine unn"otigen Risiken
+    \item Kein zus"atzlicher Schmerz
+    \item Bei schwerer Erkrankung problematisch wirksame Behandlungen zu unterschlagen
+  \end{itemize}
+\end{frame}
+
+\section{Probleme bei der praktischen Durchf"uhrung einer Erhebung}
+\begin{frame}
+  \frametitle{Grundgesamtheit}
+  \begin{itemize}[<+->]
+    \item Abgrenzung der Grundgesamtheit
+    \item endliche/unendliche Grundgesamtheiten
+    \item konkrete/fikitve Gesamtheiten
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Auswahltechniken/Erhebungsprobleme}
+  \begin{itemize}[<+->]
+    \item zuf"allige Wahl der Stichprobe
+    \item Auswahl aufs Geradewohl
+    \item Auswahl nach Namen/Geburtstagen
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Befragungen}
+  \begin{itemize}[<+->]
+    \item offene/geschlossene Fragen
+    \item suggestive Fragestellung
+    \item Interview-Umfrage
+    \item postalische Befragung
+    \item Panel-Untersuchungen
+    \item Nichtbeantwortung
+  \end{itemize}
+\end{frame}
+%\begin{frame}
+%  \frametitle{Modell der Auswahl nach Schichten}
+%  \begin{itemize}
+%    \item Zufallstichprobe ergibt $n$ Befragungen, davon $n_1$ mit Antworten, $n_2$ mit Nichtantworten
+%    \item Jeder $k$-te Nichtbeantworter wird erneut angesprochen
+%  \end{itemize}
+%\end{frame}
 \end{document}
